@@ -1,3 +1,265 @@
-{% extends 'base.html' %} {% block content %}
-<h2>content...</h2>
+{% extends 'base.html' %} {% load static %} {% block content %}
+<header class="flex justify-between items-center bg-[whitesmoke] py-2 px-4">
+  <div class="w-40 object-cover cursor-pointer">
+    <a href="/">
+      <img src="{% static 'instagram_logo.png' %}" alt="" />
+    </a>
+  </div>
+
+  <div class="flex-grow text-center">
+    <input
+      class="w-3/4 flex-grow rounded-full px-5 py-2 outline-none text-center truncate"
+      type="text"
+      placeholder="Wpisz tekst..."
+    />
+  </div>
+
+  <div
+    class="[&>img]:hidden md:[&>img]:block md:flex items-center space-x-4 [&>*]:cursor-pointer"
+  >
+    <img
+      width="24"
+      height="24"
+      src="https://img.icons8.com/material-rounded/24/home.png"
+      alt="home"
+    />
+
+    <img
+      width="24"
+      height="24"
+      src="https://img.icons8.com/ios-filled/24/sent.png"
+      alt="sent"
+    />
+
+    <img
+      width="24"
+      height="24"
+      src="https://img.icons8.com/ios-filled/24/add--v1.png"
+      alt="add--v1"
+    />
+
+    <img
+      width="24"
+      height="24"
+      src="https://img.icons8.com/fluency-systems-regular/24/user-group-woman-woman.png"
+      alt="user-group-woman-woman"
+    />
+
+    <img
+      width="24"
+      height="24"
+      src="https://img.icons8.com/ios/24/like--v1.png"
+      alt="like--v1"
+    />
+
+    <div class="w-12 h-12 rounded-full">
+      <img
+        class="rounded-full w-12 h-12"
+        src="{% static 'portrait.jpg' %}"
+        alt="avatar"
+      />
+    </div>
+  </div>
+</header>
+
+<section class="grid grid-cols-3 lg:mx-[2%]">
+  <div class="col-span-full md:col-span-2 order-2 md:-1 2xl:col-span-3">
+    <sidebarbottom
+      class="flex p-6 m-2 bg-[whitesmoke] border border-gray-200 rounded-lg overflow-x-auto space-x-4"
+    >
+      {% for person in people|slice:":30" %}
+      <div class="flex flex-col justify-center items-center">
+        <img
+          class="border-2 border-dotted border-[chocolate] p-1 rounded-full w-12 h-12 md:w-16 md:h-16"
+          src="{{ person.picture }}"
+        />
+        <p class="w-[70px] truncate">{{ person.username }}</p>
+      </div>
+      {% endfor %}
+    </sidebarbottom>
+
+    <main class="flex flex-col items-center justify-center p-2">
+      <div class="flex flex-col bg-[whitesmoke] p-3 rounded-md 2xl:w-5/6">
+        <article class="flex flex-col items-center bg-white rounded-lg p-1">
+          <div
+            class="flex justify-between items-center p-3 w-full border-b mb-4"
+          >
+            <div class="flex items-center rounded-full">
+              <img
+                class="rounded-full w-12 h-12 cursor-pointer"
+                src="{% static 'portrait.jpg' %}"
+                alt="avatar"
+              />
+
+              <p class="ml-2 text-gray-400">
+                @author <span class="text-black font-bold">kr0pa</span>
+              </p>
+            </div>
+
+            <img
+              class="cursor-pointer"
+              width="24"
+              height="24"
+              src="https://img.icons8.com/ios/24/more.png"
+              alt="more"
+            />
+          </div>
+
+          <figure>
+            <img
+              src="https://live.staticflickr.com/65535/50618365686_36f887ab88_c.jpg"
+              alt=""
+            />
+          </figure>
+
+          <div
+            class="flex justify-between items-center p-3 w-full border-t mt-4"
+          ></div>
+        </article>
+      </div>
+
+      <div class="flex flex-col bg-[whitesmoke] p-3 rounded-md 2xl:w-5/6">
+        <article class="flex flex-col items-center bg-white rounded-lg p-1">
+          <div
+            class="flex justify-between items-center p-3 w-full border-b mb-4"
+          >
+            <div class="flex items-center rounded-full">
+              <img
+                class="rounded-full w-12 h-12 cursor-pointer"
+                src="{% static 'portrait.jpg' %}"
+                alt="avatar"
+              />
+
+              <p class="ml-2 text-gray-400">
+                @author <span class="text-black font-bold">kr0pa</span>
+              </p>
+            </div>
+
+            <img
+              class="cursor-pointer"
+              width="24"
+              height="24"
+              src="https://img.icons8.com/ios/24/more.png"
+              alt="more"
+            />
+          </div>
+
+          <figure>
+            <img
+              src="https://live.staticflickr.com/65535/50618365686_36f887ab88_c.jpg"
+              alt=""
+            />
+          </figure>
+
+          <div
+            class="flex justify-between items-center p-3 w-full border-t mt-4"
+          ></div>
+        </article>
+      </div>
+
+      <div class="flex flex-col bg-[whitesmoke] p-3 rounded-md 2xl:w-5/6">
+        <article class="flex flex-col items-center bg-white rounded-lg p-1">
+          <div
+            class="flex justify-between items-center p-3 w-full border-b mb-4"
+          >
+            <div class="flex items-center rounded-full">
+              <img
+                class="rounded-full w-12 h-12 cursor-pointer"
+                src="{% static 'portrait.jpg' %}"
+                alt="avatar"
+              />
+
+              <p class="ml-2 text-gray-400">
+                @author <span class="text-black font-bold">kr0pa</span>
+              </p>
+            </div>
+
+            <img
+              class="cursor-pointer"
+              width="24"
+              height="24"
+              src="https://img.icons8.com/ios/24/more.png"
+              alt="more"
+            />
+          </div>
+
+          <figure>
+            <img
+              src="https://live.staticflickr.com/65535/50618365686_36f887ab88_c.jpg"
+              alt=""
+            />
+          </figure>
+
+          <div
+            class="flex justify-between items-center p-3 w-full border-t mt-4"
+          ></div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <sidebarright
+    x-show="sidebarOpen"
+    class="order-1 col-span-full md:flex flex-col m-2 p-2 rounded-md md:col-span-1 bg-[whitesmoke] md:order-2"
+  >
+    <div class="flex justify-between items-center space-x-2">
+      <div class="flex items-center">
+        <img
+          class="rounded-full w-14 h-14"
+          src="{% static 'portrait.jpg' %}"
+          alt="avatar"
+        />
+
+        <div class="ml-2">
+          <p class="font-bold">kr0pa</p>
+          <span class="text-sm text-gray-400">Witaj na Instagramie</span>
+        </div>
+      </div>
+
+      <a class="text-blue-500" href="/">Wyloguj się</a>
+    </div>
+
+    <hr class="mt-3" />
+
+    <div class="flex justify-between items-center my-3">
+      <p class="text-gray-400">Polecane dla ciebie</p>
+      <p class="font-bold">Zobacz wszystko</p>
+    </div>
+
+    {% for person in people|slice:"30:" %}
+    <div class="flex items-center justify-between my-2">
+      <div class="flex items-center">
+        <img
+          class="rounded-full w-11 h-11"
+          src="{{ person.picture }}"
+          alt="avatar"
+        />
+
+        <div class="md:w-[80%] lg:w-full ml-2">
+          <p class="font-bold truncate">{{ person.username }}</p>
+          <span class="text-xs text-gray-400 truncate"
+            >{{ person.first_name }} {{ person.last_name }}</span
+          >
+        </div>
+      </div>
+
+      <a class="ml-3 content-end text-blue-500 truncate" href="/">Obserwuj</a>
+    </div>
+    {% endfor %}
+  </sidebarright>
+
+  <sidebarArrow
+    x-on:click="sidebarOpen= !sidebarOpen"
+    :class="{'open': sidebarOpen}"
+    class="hidden 2xl:block fixed top-[30%] right-[1%] cursor-pointer animate-pulse"
+  >
+    <a>
+      <img
+        class="w-8 ml-1.5 rotate-90"
+        src="https://img.icons8.com/papercut/60/expand-arrow.png"
+        alt="expand-arrow"
+      />
+    </a>
+  </sidebarArrow>
+</section>
 {% endblock %}
