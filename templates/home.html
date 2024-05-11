@@ -1,5 +1,7 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
-<header class="flex justify-between items-center bg-[whitesmoke] py-2 px-4">
+<header
+  class="flex justify-between items-center bg-[whitesmoke] dark:bg-[#0F172A] py-2 px-4"
+>
   <div class="w-40 object-cover cursor-pointer">
     <a href="/">
       <img src="{% static 'instagram_logo.png' %}" alt="" />
@@ -8,7 +10,7 @@
 
   <div class="flex-grow text-center">
     <input
-      class="w-3/4 flex-grow rounded-full px-5 py-2 outline-none text-center truncate"
+      class="w-3/4 flex-grow rounded-full px-5 py-2 outline-none text-center truncate dark:bg-[#313338]"
       type="text"
       placeholder="Wpisz tekst..."
     />
@@ -62,10 +64,13 @@
   </div>
 </header>
 
-<section class="grid grid-cols-3 lg:mx-[2%]">
-  <div class="col-span-full md:col-span-2 order-2 md:-1 2xl:col-span-3">
+<section x-data="{sidebarOpen: false}" class="grid grid-cols-3 lg:mx-[2%]">
+  <div
+    class="col-span-full md:col-span-2 order-2 md:-1"
+    :class="!sidebarOpen ? '2xl:!col-span-3' : '2xl:!col-span-2'"
+  >
     <sidebarbottom
-      class="flex p-6 m-2 bg-[whitesmoke] border border-gray-200 rounded-lg overflow-x-auto space-x-4"
+      class="flex p-6 m-2 bg-[whitesmoke] dark:bg-[#2B2D31] border border-gray-200 dark:border-[#1E1F22] rounded-lg overflow-x-auto space-x-4 flex-grow"
     >
       {% for person in people|slice:":30" %}
       <div class="flex flex-col justify-center items-center">
@@ -73,14 +78,18 @@
           class="border-2 border-dotted border-[chocolate] p-1 rounded-full w-12 h-12 md:w-16 md:h-16"
           src="{{ person.picture }}"
         />
-        <p class="w-[70px] truncate">{{ person.username }}</p>
+        <p class="w-[70px] truncate dark:text-white">{{ person.username }}</p>
       </div>
       {% endfor %}
     </sidebarbottom>
 
     <main class="flex flex-col items-center justify-center p-2">
-      <div class="flex flex-col bg-[whitesmoke] p-3 rounded-md 2xl:w-5/6">
-        <article class="flex flex-col items-center bg-white rounded-lg p-1">
+      <div
+        class="flex flex-col bg-[whitesmoke] dark:bg-[#313338] p-3 rounded-md 2xl:w-5/6"
+      >
+        <article
+          class="flex flex-col items-center bg-white dark:bg-[#2B2D31] rounded-lg p-1"
+        >
           <div
             class="flex justify-between items-center p-3 w-full border-b mb-4"
           >
@@ -92,7 +101,8 @@
               />
 
               <p class="ml-2 text-gray-400">
-                @author <span class="text-black font-bold">kr0pa</span>
+                @author
+                <span class="text-black dark:text-white font-bold">kr0pa</span>
               </p>
             </div>
 
@@ -118,8 +128,12 @@
         </article>
       </div>
 
-      <div class="flex flex-col bg-[whitesmoke] p-3 rounded-md 2xl:w-5/6">
-        <article class="flex flex-col items-center bg-white rounded-lg p-1">
+      <div
+        class="flex flex-col bg-[whitesmoke] dark:bg-[#313338] p-3 rounded-md 2xl:w-5/6"
+      >
+        <article
+          class="flex flex-col items-center bg-white dark:bg-[#2B2D31] rounded-lg p-1"
+        >
           <div
             class="flex justify-between items-center p-3 w-full border-b mb-4"
           >
@@ -131,7 +145,8 @@
               />
 
               <p class="ml-2 text-gray-400">
-                @author <span class="text-black font-bold">kr0pa</span>
+                @author
+                <span class="text-black dark:text-white font-bold">kr0pa</span>
               </p>
             </div>
 
@@ -157,8 +172,12 @@
         </article>
       </div>
 
-      <div class="flex flex-col bg-[whitesmoke] p-3 rounded-md 2xl:w-5/6">
-        <article class="flex flex-col items-center bg-white rounded-lg p-1">
+      <div
+        class="flex flex-col bg-[whitesmoke] dark:bg-[#313338] p-3 rounded-md 2xl:w-5/6"
+      >
+        <article
+          class="flex flex-col items-center bg-white dark:bg-[#2B2D31] rounded-lg p-1"
+        >
           <div
             class="flex justify-between items-center p-3 w-full border-b mb-4"
           >
@@ -170,7 +189,8 @@
               />
 
               <p class="ml-2 text-gray-400">
-                @author <span class="text-black font-bold">kr0pa</span>
+                @author
+                <span class="text-black dark:text-white font-bold">kr0pa</span>
               </p>
             </div>
 
@@ -200,7 +220,7 @@
 
   <sidebarright
     x-show="sidebarOpen"
-    class="order-1 col-span-full md:flex flex-col m-2 p-2 rounded-md md:col-span-1 bg-[whitesmoke] md:order-2"
+    class="order-1 col-span-full !flex flex-col m-2 p-2 rounded-md md:col-span-1 bg-[whitesmoke] dark:bg-[#2B2D31] md:order-2"
   >
     <div class="flex justify-between items-center space-x-2">
       <div class="flex items-center">
@@ -211,7 +231,7 @@
         />
 
         <div class="ml-2">
-          <p class="font-bold">kr0pa</p>
+          <p class="font-bold dark:text-white">kr0pa</p>
           <span class="text-sm text-gray-400">Witaj na Instagramie</span>
         </div>
       </div>
@@ -223,7 +243,7 @@
 
     <div class="flex justify-between items-center my-3">
       <p class="text-gray-400">Polecane dla ciebie</p>
-      <p class="font-bold">Zobacz wszystko</p>
+      <p class="font-bold dark:text-white">Zobacz wszystko</p>
     </div>
 
     {% for person in people|slice:"30:" %}
@@ -236,7 +256,9 @@
         />
 
         <div class="md:w-[80%] lg:w-full ml-2">
-          <p class="font-bold truncate">{{ person.username }}</p>
+          <p class="font-bold truncate dark:text-white">
+            {{ person.username }}
+          </p>
           <span class="text-xs text-gray-400 truncate"
             >{{ person.first_name }} {{ person.last_name }}</span
           >
@@ -250,7 +272,6 @@
 
   <sidebarArrow
     x-on:click="sidebarOpen= !sidebarOpen"
-    :class="{'open': sidebarOpen}"
     class="hidden 2xl:block fixed top-[30%] right-[1%] cursor-pointer animate-pulse"
   >
     <a>
