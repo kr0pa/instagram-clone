@@ -1,6 +1,9 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 <header
-  class="flex justify-between items-center bg-[whitesmoke] dark:bg-[#0F172A] py-2 px-4"
+  x-data="{darkMode: false}"
+  x-ref="header"
+  :class="darkMode ? document.querySelector('html').classList.add('dark') : document.querySelector('html').classList.remove('dark')"
+  class="flex justify-between items-center bg-[whitesmoke] dark:bg-[#0F172A] py-2 px-4 transition-all duration-300"
 >
   <div class="w-40 object-cover cursor-pointer">
     <a href="/">
@@ -8,9 +11,9 @@
     </a>
   </div>
 
-  <div class="flex-grow text-center">
+  <div class="flex-grow text-center select-none">
     <input
-      class="w-3/4 flex-grow rounded-full px-5 py-2 outline-none text-center truncate dark:bg-[#313338]"
+      class="w-3/4 flex-grow rounded-full px-5 py-2 outline-none text-center truncate dark:bg-[#313338] dark:text-white transition-all duration-300"
       type="text"
       placeholder="Wpisz tekst..."
     />
@@ -22,36 +25,45 @@
     <img
       width="24"
       height="24"
-      src="https://img.icons8.com/material-rounded/24/home.png"
+      x-bind:src="darkMode ? 'https://img.icons8.com/material-rounded/24/FFFFFF/home.png' : 'https://img.icons8.com/material-rounded/24/home.png'"
       alt="home"
     />
 
     <img
       width="24"
       height="24"
-      src="https://img.icons8.com/ios-filled/24/sent.png"
+      x-bind:src="darkMode ? 'https://img.icons8.com/ios-filled/24/FFFFFF/sent.png' : 'https://img.icons8.com/ios-filled/24/sent.png'"
       alt="sent"
     />
 
     <img
       width="24"
       height="24"
-      src="https://img.icons8.com/ios-filled/24/add--v1.png"
+      x-bind:src="darkMode ? 'https://img.icons8.com/ios-filled/24/FFFFFF/add--v1.png' : 'https://img.icons8.com/ios-filled/24/add--v1.png'"
       alt="add--v1"
     />
 
     <img
       width="24"
       height="24"
-      src="https://img.icons8.com/fluency-systems-regular/24/user-group-woman-woman.png"
+      x-bind:src="darkMode ? 'https://img.icons8.com/fluency-systems-regular/24/FFFFFF/user-group-woman-woman.png' : 'https://img.icons8.com/fluency-systems-regular/24/user-group-woman-woman.png'"
       alt="user-group-woman-woman"
     />
 
     <img
       width="24"
       height="24"
-      src="https://img.icons8.com/ios/24/like--v1.png"
+      x-bind:src="darkMode ? 'https://img.icons8.com/ios/24/FFFFFF/like--v1.png' : 'https://img.icons8.com/ios/24/like--v1.png'"
       alt="like--v1"
+    />
+
+    <img
+      x-on:click="darkMode = !darkMode"
+      class="!ml-8"
+      width="28"
+      height="28"
+      x-bind:src="darkMode ? 'https://img.icons8.com/ios-filled/50/FFFFFF/moon-symbol.png' : 'https://img.icons8.com/ios/50/sun--v1.png'"
+      alt="moon-symbol"
     />
 
     <div class="w-12 h-12 rounded-full">
@@ -66,29 +78,33 @@
 
 <section x-data="{sidebarOpen: false}" class="grid grid-cols-3 lg:mx-[2%]">
   <div
-    class="col-span-full md:col-span-2 order-2 md:-1"
+    class="col-span-full md:col-span-2 order-2"
     :class="!sidebarOpen ? '2xl:!col-span-3' : '2xl:!col-span-2'"
   >
     <sidebarbottom
-      class="flex p-6 m-2 bg-[whitesmoke] dark:bg-[#2B2D31] border border-gray-200 dark:border-[#1E1F22] rounded-lg overflow-x-auto space-x-4 flex-grow"
+      class="flex p-6 m-2 bg-[whitesmoke] dark:bg-[#2B2D31] border border-gray-200 dark:border-[#1E1F22] rounded-lg overflow-x-auto space-x-4 flex-grow transition-all duration-300"
     >
       {% for person in people|slice:":30" %}
-      <div class="flex flex-col justify-center items-center">
+      <div class="flex flex-col justify-center items-center mr-3">
         <img
           class="border-2 border-dotted border-[chocolate] p-1 rounded-full w-12 h-12 md:w-16 md:h-16"
           src="{{ person.picture }}"
         />
-        <p class="w-[70px] truncate dark:text-white">{{ person.username }}</p>
+        <p
+          class="w-[70px] md:w-full truncate md:overflow-visible dark:text-white"
+        >
+          {{ person.username }}
+        </p>
       </div>
       {% endfor %}
     </sidebarbottom>
 
     <main class="flex flex-col items-center justify-center p-2">
       <div
-        class="flex flex-col bg-[whitesmoke] dark:bg-[#313338] p-3 rounded-md 2xl:w-5/6"
+        class="flex flex-col bg-[whitesmoke] dark:bg-[#313338] p-3 rounded-md 2xl:w-5/6 transition-all duration-300"
       >
         <article
-          class="flex flex-col items-center bg-white dark:bg-[#2B2D31] rounded-lg p-1"
+          class="flex flex-col items-center bg-white dark:bg-[#2B2D31] rounded-lg p-1 transition-all duration-300"
         >
           <div
             class="flex justify-between items-center p-3 w-full border-b mb-4"
@@ -102,15 +118,17 @@
 
               <p class="ml-2 text-gray-400">
                 @author
-                <span class="text-black dark:text-white font-bold">kr0pa</span>
+                <span
+                  class="text-black dark:text-white font-bold transition-all duration-300"
+                  >kr0pa</span
+                >
               </p>
             </div>
 
             <img
-              class="cursor-pointer"
-              width="24"
-              height="24"
-              src="https://img.icons8.com/ios/24/more.png"
+              width="36"
+              height="36"
+              src="https://img.icons8.com/fluency/36/more.png"
               alt="more"
             />
           </div>
@@ -129,10 +147,10 @@
       </div>
 
       <div
-        class="flex flex-col bg-[whitesmoke] dark:bg-[#313338] p-3 rounded-md 2xl:w-5/6"
+        class="flex flex-col bg-[whitesmoke] dark:bg-[#313338] p-3 rounded-md 2xl:w-5/6 transition-all duration-300"
       >
         <article
-          class="flex flex-col items-center bg-white dark:bg-[#2B2D31] rounded-lg p-1"
+          class="flex flex-col items-center bg-white dark:bg-[#2B2D31] rounded-lg p-1 transition-all duration-300"
         >
           <div
             class="flex justify-between items-center p-3 w-full border-b mb-4"
@@ -146,15 +164,17 @@
 
               <p class="ml-2 text-gray-400">
                 @author
-                <span class="text-black dark:text-white font-bold">kr0pa</span>
+                <span
+                  class="text-black dark:text-white font-bold transition-all duration-300"
+                  >kr0pa</span
+                >
               </p>
             </div>
 
             <img
-              class="cursor-pointer"
-              width="24"
-              height="24"
-              src="https://img.icons8.com/ios/24/more.png"
+              width="36"
+              height="36"
+              src="https://img.icons8.com/fluency/36/more.png"
               alt="more"
             />
           </div>
@@ -173,10 +193,10 @@
       </div>
 
       <div
-        class="flex flex-col bg-[whitesmoke] dark:bg-[#313338] p-3 rounded-md 2xl:w-5/6"
+        class="flex flex-col bg-[whitesmoke] dark:bg-[#313338] p-3 rounded-md 2xl:w-5/6 transition-all duration-300"
       >
         <article
-          class="flex flex-col items-center bg-white dark:bg-[#2B2D31] rounded-lg p-1"
+          class="flex flex-col items-center bg-white dark:bg-[#2B2D31] rounded-lg p-1 transition-all duration-300"
         >
           <div
             class="flex justify-between items-center p-3 w-full border-b mb-4"
@@ -190,15 +210,17 @@
 
               <p class="ml-2 text-gray-400">
                 @author
-                <span class="text-black dark:text-white font-bold">kr0pa</span>
+                <span
+                  class="text-black dark:text-white font-bold transition-all duration-300"
+                  >kr0pa</span
+                >
               </p>
             </div>
 
             <img
-              class="cursor-pointer"
-              width="24"
-              height="24"
-              src="https://img.icons8.com/ios/24/more.png"
+              width="36"
+              height="36"
+              src="https://img.icons8.com/fluency/36/more.png"
               alt="more"
             />
           </div>
@@ -220,7 +242,8 @@
 
   <sidebarright
     x-show="sidebarOpen"
-    class="order-1 col-span-full !flex flex-col m-2 p-2 rounded-md md:col-span-1 bg-[whitesmoke] dark:bg-[#2B2D31] md:order-2"
+    class="order-1 col-span-full !flex flex-col m-2 p-2 rounded-md md:col-span-1 bg-[whitesmoke] dark:bg-[#2B2D31] md:order-2 transition-all duration-300"
+    :class="!sidebarOpen && '2xl:fixed top-full left-full'"
   >
     <div class="flex justify-between items-center space-x-2">
       <div class="flex items-center">
@@ -231,7 +254,9 @@
         />
 
         <div class="ml-2">
-          <p class="font-bold dark:text-white">kr0pa</p>
+          <p class="font-bold dark:text-white transition-all duration-300">
+            kr0pa
+          </p>
           <span class="text-sm text-gray-400">Witaj na Instagramie</span>
         </div>
       </div>
@@ -243,7 +268,9 @@
 
     <div class="flex justify-between items-center my-3">
       <p class="text-gray-400">Polecane dla ciebie</p>
-      <p class="font-bold dark:text-white">Zobacz wszystko</p>
+      <p class="font-bold dark:text-white transition-all duration-300">
+        Zobacz wszystko
+      </p>
     </div>
 
     {% for person in people|slice:"30:" %}
@@ -256,7 +283,9 @@
         />
 
         <div class="md:w-[80%] lg:w-full ml-2">
-          <p class="font-bold truncate dark:text-white">
+          <p
+            class="font-bold truncate dark:text-white transition-all duration-300"
+          >
             {{ person.username }}
           </p>
           <span class="text-xs text-gray-400 truncate"
@@ -270,9 +299,9 @@
     {% endfor %}
   </sidebarright>
 
-  <sidebarArrow
-    x-on:click="sidebarOpen= !sidebarOpen"
-    class="hidden 2xl:block fixed top-[30%] right-[1%] cursor-pointer animate-pulse"
+  <sidebararrow
+    x-on:click="sidebarOpen = !sidebarOpen"
+    class="hidden 2xl:block fixed top-[30%] right-[.5%] cursor-pointer animate-pulse"
   >
     <a>
       <img
@@ -281,6 +310,6 @@
         alt="expand-arrow"
       />
     </a>
-  </sidebarArrow>
+  </sidebararrow>
 </section>
 {% endblock %}
