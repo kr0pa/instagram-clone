@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .forms import PostForm
 import requests
 
 
@@ -26,3 +27,9 @@ def home(request):
         print('Nie udało się pobrać danych użytkowników')
 
     return render(request, 'home.html', {'people': people})
+
+
+def create_post(request):
+    form = PostForm()
+    
+    return render(request, 'create_post.html', {'form': form})
