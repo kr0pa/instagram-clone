@@ -1,6 +1,9 @@
 {% load static %}
+
+<!-- <html lang="en"  :class="{ 'dark': darkMode }"></html> -->
+
 <header
-  x-data="{darkMode: false}"
+  x-data="{ darkMode: localStorage.getItem('dark') === 'true' }"
   :class="darkMode ? document.querySelector('html').classList.add('dark') : document.querySelector('html').classList.remove('dark')"
   class="flex justify-between items-center bg-[whitesmoke] dark:bg-[#0F172A] py-2 px-4 transition-all duration-300"
 >
@@ -59,11 +62,13 @@
     />
 
     <img
-      x-on:click="darkMode = !darkMode"
+      x-on:click="darkMode = !darkMode; localStorage.setItem('dark', darkMode)"
       class="!ml-8 cursor-pointer"
       width="28"
       height="28"
-      x-bind:src="darkMode ? 'https://img.icons8.com/ios-filled/50/FFFFFF/moon-symbol.png' : 'https://img.icons8.com/ios/50/sun--v1.png'"
+      x-bind:src="darkMode ?
+    'https://img.icons8.com/ios-filled/50/FFFFFF/moon-symbol.png' :
+    'https://img.icons8.com/ios/50/sun--v1.png'"
       alt="dark-mode"
     />
 
@@ -75,4 +80,6 @@
       />
     </div>
   </div>
+
+  <script></script>
 </header>

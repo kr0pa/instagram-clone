@@ -1,9 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import PostForm
 import requests
+from django.contrib.auth.decorators import login_required
+from .models import Post
 
 
 def home(request):
+    posts = Post.objects.all()
     response = requests.get('https://randomuser.me/api/?results=35')
     data = response.json()
 
@@ -26,10 +29,20 @@ def home(request):
     else:
         print('Nie udało się pobrać danych użytkowników')
 
-    return render(request, 'home.html', {'people': people})
+    return render(request, 'home.html', {'people': people, 'posts': posts})
 
 
+@login_required
 def create_post(request):
-    form = PostForm()
+    if request.method == 'POST':
+        form = PostForm(data=request.POST)
+        
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('app_post:home')
+    else:
+        form = PostForm()
     
     return render(request, 'create_post.html', {'form': form})
