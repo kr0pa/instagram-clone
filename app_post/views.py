@@ -35,7 +35,7 @@ def home(request):
 @login_required
 def create_post(request):
     if request.method == 'POST':
-        form = PostForm(data=request.POST)
+        form = PostForm(request.POST, request.FILES)
         
         if form.is_valid():
             post = form.save(commit=False)
@@ -46,3 +46,8 @@ def create_post(request):
         form = PostForm()
     
     return render(request, 'create_post.html', {'form': form})
+
+
+def handler404(request, exception):
+    
+    return render(request, '404.html', status=404)

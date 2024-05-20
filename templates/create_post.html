@@ -2,7 +2,8 @@
 <section class="flex flex-col items-center justify-center min-h-screen">
   <form
     class="flex flex-col items-center justify-center p-10 rounded-lg bg-[whitesmoke] dark:bg-[#2B2D31] [&>*]:mb-4 [&>*]:w-full"
-    method="POSt"
+    method="POST"
+    enctype="multipart/form-data"
   >
     {% csrf_token %} {{ form.as_p }}
     <button
