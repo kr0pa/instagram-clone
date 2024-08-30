@@ -1,85 +1,35 @@
 {% load static %}
 
-<!-- <html lang="en"  :class="{ 'dark': darkMode }"></html> -->
-
-<header
-  x-data="{ darkMode: localStorage.getItem('dark') === 'true' }"
-  :class="darkMode ? document.querySelector('html').classList.add('dark') : document.querySelector('html').classList.remove('dark')"
-  class="flex justify-between items-center bg-[whitesmoke] dark:bg-[#0F172A] py-2 px-4 transition-all duration-300"
->
-  <div class="w-40 object-cover cursor-pointer">
-    <a href="/">
-      <img src="{% static 'instagram_logo.png' %}" alt="" />
-    </a>
+<header class="flex justify-between items-center max-h-[70px] bg-[whitesmoke] dark:bg-[#0F172A] py-2 px-4 transition-all duration-300">
+  <div class="flex w-40 object-cover cursor-pointer">
+    <a href="/"><img src="{% static 'instagram_logo.png' %}" alt="" /></a>
   </div>
 
-  <div class="flex-grow text-center select-none">
-    <input
-      class="w-5/6 flex-grow rounded-full px-5 py-2 outline-none text-center truncate dark:bg-[#313338] dark:text-white transition-all duration-300"
-      type="text"
-      placeholder="Wpisz tekst..."
-    />
-  </div>
+  <div class="hidden md:flex justify-between items-center flex-1">
+    <div class="flex-grow text-center select-none">
+      <input class="w-5/6 flex-grow rounded-full px-5 py-2 outline-none text-center truncate dark:bg-[#313338] dark:text-white transition-all duration-300" type="text" placeholder="Wpisz tekst..." />
+    </div>
 
-  <div class="[&>img]:hidden md:[&>img]:block md:flex items-center space-x-4">
-    <a href="/">
-      <img
-        width="24"
-        height="24"
-        x-bind:src="darkMode ? 'https://img.icons8.com/material-rounded/24/FFFFFF/home.png' : 'https://img.icons8.com/material-rounded/24/home.png'"
-        alt="home"
-      />
-    </a>
+    <div class="[&>img]:hidden md:[&>img]:block md:flex items-center space-x-4">
+      <a href="/"><img width="24" height="24" x-bind:src="darkMode ? 'https://img.icons8.com/material-rounded/24/FFFFFF/home.png' : 'https://img.icons8.com/material-rounded/24/home.png'" alt="home" /></a>
 
-    <img
-      width="24"
-      height="24"
-      x-bind:src="darkMode ? 'https://img.icons8.com/ios-filled/24/FFFFFF/sent.png' : 'https://img.icons8.com/ios-filled/24/sent.png'"
-      alt="sent"
-    />
+      <img width="24" height="24" x-bind:src="darkMode ? 'https://img.icons8.com/ios-filled/24/FFFFFF/sent.png' : 'https://img.icons8.com/ios-filled/24/sent.png'" alt="sent" />
 
-    <a href="{% url 'app_post:create_post' %}">
-      <img
-        width="24"
-        height="24"
-        x-bind:src="darkMode ? 'https://img.icons8.com/ios-filled/24/FFFFFF/add--v1.png' : 'https://img.icons8.com/ios-filled/24/add--v1.png'"
-        alt="add--v1"
-      />
-    </a>
+      <a href="{% url 'app_post:create_post' %}"><img width="24" height="24" x-bind:src="darkMode ? 'https://img.icons8.com/ios-filled/24/FFFFFF/add--v1.png' : 'https://img.icons8.com/ios-filled/24/add--v1.png'" alt="add--v1" /></a>
 
-    <img
-      width="24"
-      height="24"
-      x-bind:src="darkMode ? 'https://img.icons8.com/fluency-systems-regular/24/FFFFFF/user-group-woman-woman.png' : 'https://img.icons8.com/fluency-systems-regular/24/user-group-woman-woman.png'"
-      alt="user-group-woman-woman"
-    />
+      <img width="24" height="24" x-bind:src="darkMode ? 'https://img.icons8.com/fluency-systems-regular/24/FFFFFF/user-group-woman-woman.png' : 'https://img.icons8.com/fluency-systems-regular/24/user-group-woman-woman.png'" alt="user-group-woman-woman" />
 
-    <img
-      width="24"
-      height="24"
-      x-bind:src="darkMode ? 'https://img.icons8.com/ios/24/FFFFFF/like--v1.png' : 'https://img.icons8.com/ios/24/like--v1.png'"
-      alt="like--v1"
-    />
+      <img width="24" height="24" x-bind:src="darkMode ? 'https://img.icons8.com/ios/24/FFFFFF/like--v1.png' : 'https://img.icons8.com/ios/24/like--v1.png'" alt="like--v1" />
 
-    <img
-      x-on:click="darkMode = !darkMode; localStorage.setItem('dark', darkMode)"
-      class="!ml-8 cursor-pointer"
-      width="28"
-      height="28"
-      x-bind:src="darkMode ?
-    'https://img.icons8.com/ios-filled/50/FFFFFF/moon-symbol.png' :
-    'https://img.icons8.com/ios/50/sun--v1.png'"
-      alt="dark-mode"
-    />
+      <img x-on:click="darkMode = !darkMode" class="!ml-8 cursor-pointer" width="28" height="28" x-bind:src="darkMode ? 'https://img.icons8.com/ios-filled/50/FFFFFF/moon-symbol.png' : 'https://img.icons8.com/ios/50/sun--v1.png'" alt="dark-mode" />
 
-    <div class="w-12 h-12 rounded-full">
-      <img
-        class="rounded-full w-12 h-12"
-        src="{% static 'portrait.jpg' %}"
-        alt="avatar"
-      />
+      <div class="w-12 h-12 rounded-full">
+        <img class="rounded-full w-12 h-12" src="{% static 'avatar_default.png' %}" alt="avatar" />
+      </div>
     </div>
   </div>
 
-  <script></script>
+  <div class="block md:hidden">
+    <img class="w-6 h-6 select-none cursor-pointer" src="https://img.icons8.com/small/64/ffffff/menu.png" />
+  </div>
 </header>

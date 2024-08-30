@@ -1,146 +1,85 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
+  <section class="grid grid-cols-3">
+    <div class="col-span-full md:col-span-2 order-2" :class="!sidebarOpen ? '2xl:!col-span-3' : '2xl:!col-span-2'">
+      <sidebarbottom class="flex p-6 m-2 bg-[whitesmoke] dark:bg-[#2B2D31] border border-gray-200 dark:border-[#1E1F22] rounded-lg overflow-x-auto space-x-4 flex-grow transition-all duration-300">
+        {% for person in people|slice:':30' %}
+          <div class="flex flex-col justify-center items-center mr-3">
+            <img class="border-2 border-dotted border-[chocolate] p-1 rounded-full w-12 h-12 md:w-16 md:h-16" src="{{ person.picture }}" />
+            <p class="w-[70px] md:w-full truncate md:overflow-visible dark:text-white">{{ person.username }}</p>
+          </div>
+        {% endfor %}
+      </sidebarbottom>
 
-<section x-data="{sidebarOpen: false}" class="grid grid-cols-3 lg:mx-[2%]">
-  <div
-    class="col-span-full md:col-span-2 order-2"
-    :class="!sidebarOpen ? '2xl:!col-span-3' : '2xl:!col-span-2'"
-  >
-    <sidebarbottom
-      class="flex p-6 m-2 bg-[whitesmoke] dark:bg-[#2B2D31] border border-gray-200 dark:border-[#1E1F22] rounded-lg overflow-x-auto space-x-4 flex-grow transition-all duration-300"
-    >
-      {% for person in people|slice:":30" %}
-      <div class="flex flex-col justify-center items-center mr-3">
-        <img
-          class="border-2 border-dotted border-[chocolate] p-1 rounded-full w-12 h-12 md:w-16 md:h-16"
-          src="{{ person.picture }}"
-        />
-        <p
-          class="w-[70px] md:w-full truncate md:overflow-visible dark:text-white"
-        >
-          {{ person.username }}
-        </p>
+      <main class="flex flex-col items-center justify-center p-2">
+        {% for post in posts %}
+          <div class="flex flex-col w-full bg-[whitesmoke] dark:bg-[#2B2D31] p-3 rounded-md 2xl:w-[95%] transition-all duration-300">
+            <article class="flex flex-col items-center bg-white dark:bg-[#313338] rounded-lg px-4 transition-all duration-300">
+              <div class="flex justify-between items-center p-3 w-full border-b mb-4">
+                <div class="flex items-center rounded-full">
+                  <img class="rounded-full w-12 h-12 cursor-pointer" src="{% static 'avatar_default.png' %}" alt="avatar" />
+
+                  <p class="ml-2 text-gray-400">
+                    @author
+                    <span class="text-black dark:text-white font-bold transition-all duration-300">kr0pa</span>
+                  </p>
+                </div>
+
+                <img width="36" height="36" src="https://img.icons8.com/fluency/36/more.png" alt="more" />
+              </div>
+
+              <figure>
+                <img class="w-full object-cover" src="{{ post.image.url }}" alt="" />
+              </figure>
+
+              <div class="flex justify-between items-center p-3 w-full border-t mt-4"></div>
+            </article>
+          </div>
+        {% endfor %}
+      </main>
+    </div>
+
+    <sidebarright x-show="sidebarOpen" class="order-1 col-span-full !flex flex-col m-2 p-2 rounded-md md:col-span-1 bg-[whitesmoke] dark:bg-[#2B2D31] md:order-2" :class="!sidebarOpen && '2xl:fixed top-full left-full'" x-cloak x-transition:enter="duration-300 ease-out" x-transition:enter-start="opacity-0 translate-x-96" x-transition:enter-end="opacity-100 translate-x-0" x-transition:leave="duration-300 ease-in" x-transition:leave-start="opacity-100 translate-x-0" x-transition:leave-end="opacity-0 translate-x-96">
+      <div class="flex justify-between items-center space-x-2">
+        <div class="flex items-center">
+          <img class="rounded-full w-14 h-14" src="{% static 'avatar_default.png' %}" alt="avatar" />
+
+          <div class="ml-2">
+            <p class="font-bold dark:text-white transition-all duration-300">kr0pa</p>
+            <span class="text-sm text-gray-400">Witaj na Instagramie</span>
+          </div>
+        </div>
+
+        <a class="text-blue-500" href="/">Wyloguj się</a>
       </div>
-      {% endfor %}
-    </sidebarbottom>
 
-    <main class="flex flex-col items-center justify-center p-2">
-      {% for post in posts %}
-      <div
-        class="flex flex-col bg-[whitesmoke] dark:bg-[#313338] p-3 rounded-md 2xl:w-5/6 transition-all duration-300"
-      >
-        <article
-          class="flex flex-col items-center bg-white dark:bg-[#2B2D31] rounded-lg px-4 ptransition-all duration-300"
-        >
-          <div
-            class="flex justify-between items-center p-3 w-full border-b mb-4"
-          >
-            <div class="flex items-center rounded-full">
-              <img
-                class="rounded-full w-12 h-12 cursor-pointer"
-                src="{% static 'portrait.jpg' %}"
-                alt="avatar"
-              />
+      <hr class="mt-3" />
 
-              <p class="ml-2 text-gray-400">
-                @author
-                <span
-                  class="text-black dark:text-white font-bold transition-all duration-300"
-                  >kr0pa</span
-                >
-              </p>
+      <div class="flex justify-between items-center my-3">
+        <p class="text-gray-400">Polecane dla ciebie</p>
+        <p class="font-bold dark:text-white transition-all duration-300">Zobacz wszystko</p>
+      </div>
+
+      {% for person in people|slice:'30:' %}
+        <div class="flex items-center justify-between my-2 mr-2">
+          <div class="flex items-center">
+            <img class="rounded-full w-11 h-11" src="{{ person.picture }}" alt="avatar" />
+
+            <div class="md:w-[80%] lg:w-full mx-2">
+              <p class="font-bold truncate dark:text-white transition-all duration-300">{{ person.username }}</p>
+              <span class="text-xs text-gray-400 truncate">{{ person.first_name }} {{ person.last_name }}</span>
             </div>
-
-            <img
-              width="36"
-              height="36"
-              src="https://img.icons8.com/fluency/36/more.png"
-              alt="more"
-            />
           </div>
 
-          <figure class="w-full h-auto">
-            <img class="m-auto" src="{{ post.image.url }}" alt="" />
-          </figure>
-
-          <div
-            class="flex justify-between items-center p-3 w-full border-t mt-4"
-          ></div>
-        </article>
-      </div>
+          <a class="block md:hidden lg:block ml-3 content-end text-blue-500 truncate" href="/">Obserwuj</a>
+          <img class="hidden md:block lg:hidden cursor-pointer" width="30" height="30" x-bind:src="darkMode ? 'https://img.icons8.com/ios-filled/50/FFFFFF/add-user-male.png' : 'https://img.icons8.com/ios-filled/50/add-user-male.png'" alt="add-user-male" />
+        </div>
       {% endfor %}
-    </main>
-  </div>
+    </sidebarright>
 
-  <sidebarright
-    x-show="sidebarOpen"
-    class="order-1 col-span-full !flex flex-col m-2 p-2 rounded-md md:col-span-1 bg-[whitesmoke] dark:bg-[#2B2D31] md:order-2 transition-all duration-300"
-    :class="!sidebarOpen && '2xl:fixed top-full left-full'"
-  >
-    <div class="flex justify-between items-center space-x-2">
-      <div class="flex items-center">
-        <img
-          class="rounded-full w-14 h-14"
-          src="{% static 'portrait.jpg' %}"
-          alt="avatar"
-        />
+    <sidebararrow x-cloak x-on:click="sidebarOpen = !sidebarOpen" class="hidden 2xl:block fixed top-[30%] right-[.5%] cursor-pointer animate-pulse">
+      <a><img x-show="!sidebarOpen" class="w-8 ml-1.5 rotate-90" src="https://img.icons8.com/papercut/60/expand-arrow.png" alt="expand-arrow" /></a>
 
-        <div class="ml-2">
-          <p class="font-bold dark:text-white transition-all duration-300">
-            kr0pa
-          </p>
-          <span class="text-sm text-gray-400">Witaj na Instagramie</span>
-        </div>
-      </div>
-
-      <a class="text-blue-500" href="/">Wyloguj się</a>
-    </div>
-
-    <hr class="mt-3" />
-
-    <div class="flex justify-between items-center my-3">
-      <p class="text-gray-400">Polecane dla ciebie</p>
-      <p class="font-bold dark:text-white transition-all duration-300">
-        Zobacz wszystko
-      </p>
-    </div>
-
-    {% for person in people|slice:"30:" %}
-    <div class="flex items-center justify-between my-2">
-      <div class="flex items-center">
-        <img
-          class="rounded-full w-11 h-11"
-          src="{{ person.picture }}"
-          alt="avatar"
-        />
-
-        <div class="md:w-[80%] lg:w-full ml-2">
-          <p
-            class="font-bold truncate dark:text-white transition-all duration-300"
-          >
-            {{ person.username }}
-          </p>
-          <span class="text-xs text-gray-400 truncate"
-            >{{ person.first_name }} {{ person.last_name }}</span
-          >
-        </div>
-      </div>
-
-      <a class="ml-3 content-end text-blue-500 truncate" href="/">Obserwuj</a>
-    </div>
-    {% endfor %}
-  </sidebarright>
-
-  <sidebararrow
-    x-on:click="sidebarOpen = !sidebarOpen"
-    class="hidden 2xl:block fixed top-[30%] right-[.5%] cursor-pointer animate-pulse"
-  >
-    <a>
-      <img
-        class="w-8 ml-1.5 rotate-90"
-        src="https://img.icons8.com/papercut/60/expand-arrow.png"
-        alt="expand-arrow"
-      />
-    </a>
-  </sidebararrow>
-</section>
+      <a><img x-show="sidebarOpen" class="w-8 ml-1.5 -rotate-90" src="https://img.icons8.com/papercut/60/expand-arrow.png" alt="expand-arrow" /></a>
+    </sidebararrow>
+  </section>
 {% endblock %}

@@ -1,25 +1,45 @@
-{% load static %} {% load static tailwind_tags %}
+{% load static %}
+{% load static tailwind_tags %}
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link
-        rel="icon"
-        href="{% static 'instagram.png' %}"
-        type="image/x-icon"
-      />
-      <title>Instagram - clone</title>
-      <script src="https://cdn.tailwindcss.com"></script>
-      <script
-        defer
-        src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
-      ></script>
-      <!-- <link rel="stylesheet" href="{% static 'style.css' %}" /> -->
-      {% tailwind_css %}
-    </head>
-    <body class="cursor-default min-w-[300px] bg-white dark:bg-[#313338]">
-      {% include 'includes/header.html' %} {% block content %} {% endblock %}
-    </body>
-  </html>
+  <html lang="en" x-data="{ darkMode: localStorage.getItem('dark') === 'true', sidebarOpen: false}" x-init="$watch('darkMode', value => localStorage.setItem('dark', value))" :class="{ 'dark': darkMode, 'light': !darkMode }">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="{% static 'instagram.png' %}" type="image/x-icon" />
+    <title>Instagram - clone</title>
+    <script>
+      function isDarkModeEnabled() {
+        const darkMode = localStorage.getItem('dark')
+        return darkMode === 'true'
+      }
+      function applyDarkModeClass() {
+        if (isDarkModeEnabled()) {
+          document.documentElement.classList.add('dark')
+        } else {
+          document.documentElement.classList.remove('dark')
+        }
+      }
+      applyDarkModeClass()
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
+    {% comment %} <script src="https://cdn.tailwindcss.com"></script> {% endcomment %}
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    {% comment %} <link rel="stylesheet" href="{% static 'style.css' %}" /> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}" />
+    {% tailwind_css %}
+    <style type="text/tailwindcss">
+      [x-cloak] {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body class="cursor-default min-w-[400px] bg-white dark:bg-[#313338]">
+    {% include 'includes/header.html' %} 
+    {% block content %}
+
+    {% endblock %}
+    {% include 'includes/footer.html' %}
+  </body>
 </html>

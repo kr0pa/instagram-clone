@@ -32,7 +32,6 @@ def home(request):
     return render(request, 'home.html', {'people': people, 'posts': posts})
 
 
-@login_required
 def create_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
