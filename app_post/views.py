@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import PostForm
+from .forms import PostForm, EditForm
 import requests
 from django.contrib.auth.decorators import login_required
 from .models import Post
@@ -32,9 +32,10 @@ def home(request):
     return render(request, 'home.html', {'people': people, 'posts': posts})
 
 
+@login_required
 def create_post(request):
     if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
+        form = PostForm(data=request.POST, files=request.FILES)
         
         if form.is_valid():
             post = form.save(commit=False)
@@ -45,6 +46,20 @@ def create_post(request):
         form = PostForm()
     
     return render(request, 'create_post.html', {'form': form})
+
+
+def view_edit_post(request, pk):
+    post = get_object_or_404(Post, id=pk)
+    form = EditForm(instance=post)
+    
+    if request.method == 'POST':
+        form = EditForm(data=request.POST, instance=post)
+        
+        if form.is_valid():
+            form.save()
+            return redirect('app_post:home')
+    
+    return render(request, 'view_post.html', {'post': post, 'form': form})
 
 
 def handler404(request, exception):

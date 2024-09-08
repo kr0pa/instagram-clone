@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
-  <section class="grid grid-cols-3">
-    <div class="col-span-full md:col-span-2 order-2" :class="!sidebarOpen ? '2xl:!col-span-3' : '2xl:!col-span-2'">
+  <section class="grid grid-cols-3 min-h-screen max-w-screen-2xl mx-auto">
+    <div class="col-span-full md:col-span-2 order-2" :class="!sidebarOpen ? 'md:!col-span-3' : 'md:!col-span-2'">
       <sidebarbottom class="flex p-6 m-2 bg-[whitesmoke] dark:bg-[#2B2D31] border border-gray-200 dark:border-[#1E1F22] rounded-lg overflow-x-auto space-x-4 flex-grow transition-all duration-300">
         {% for person in people|slice:':30' %}
           <div class="flex flex-col justify-center items-center mr-3">
@@ -28,7 +28,7 @@
               </div>
 
               <figure>
-                <img class="w-full object-cover" src="{{ post.image.url }}" alt="" />
+                <a href="{% url 'app_post:view_post' post.id %}"><img class="w-full object-cover" src="{{ post.image.url }}" alt="" /></a>
               </figure>
 
               <div class="flex justify-between items-center p-3 w-full border-t mt-4"></div>
@@ -71,12 +71,12 @@
           </div>
 
           <a class="block md:hidden lg:block ml-3 content-end text-blue-500 truncate" href="/">Obserwuj</a>
-          <img class="hidden md:block lg:hidden cursor-pointer" width="30" height="30" x-bind:src="darkMode ? 'https://img.icons8.com/ios-filled/50/FFFFFF/add-user-male.png' : 'https://img.icons8.com/ios-filled/50/add-user-male.png'" alt="add-user-male" />
+          <img class="hidden md:block lg:hidden cursor-pointer ml-4" width="30" height="30" x-bind:src="darkMode ? 'https://img.icons8.com/ios-filled/50/FFFFFF/add-user-male.png' : 'https://img.icons8.com/ios-filled/50/add-user-male.png'" alt="add-user-male" />
         </div>
       {% endfor %}
     </sidebarright>
 
-    <sidebararrow x-cloak x-on:click="sidebarOpen = !sidebarOpen" class="hidden 2xl:block fixed top-[30%] right-[.5%] cursor-pointer animate-pulse">
+    <sidebararrow x-cloak x-on:click="sidebarOpen = !sidebarOpen" class="hidden md:block 2xl:hidden fixed top-[30%] right-[.5%] cursor-pointer animate-pulse">
       <a><img x-show="!sidebarOpen" class="w-8 ml-1.5 rotate-90" src="https://img.icons8.com/papercut/60/expand-arrow.png" alt="expand-arrow" /></a>
 
       <a><img x-show="sidebarOpen" class="w-8 ml-1.5 -rotate-90" src="https://img.icons8.com/papercut/60/expand-arrow.png" alt="expand-arrow" /></a>

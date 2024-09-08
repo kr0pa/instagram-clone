@@ -1,7 +1,7 @@
 {% load static %}
 {% load static tailwind_tags %}
 <!DOCTYPE html>
-  <html lang="en" x-data="{ darkMode: localStorage.getItem('dark') === 'true', sidebarOpen: false}" x-init="$watch('darkMode', value => localStorage.setItem('dark', value))" :class="{ 'dark': darkMode, 'light': !darkMode }">
+  <html lang="en" x-data="{ darkMode: localStorage.getItem('dark') === 'true', sidebarOpen: true}" x-init="$watch('darkMode', value => localStorage.setItem('dark', value))" :class="{ 'dark': darkMode, 'light': !darkMode }">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,25 +21,25 @@
       }
       applyDarkModeClass()
     </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
     {% comment %} <script src="https://cdn.tailwindcss.com"></script> {% endcomment %}
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     {% comment %} <link rel="stylesheet" href="{% static 'style.css' %}" /> {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}" />
-    {% tailwind_css %}
     <style type="text/tailwindcss">
       [x-cloak] {
         display: none !important;
       }
     </style>
+    {% tailwind_css %} 
   </head>
-  <body class="cursor-default min-w-[400px] bg-white dark:bg-[#313338]">
+  <body class="cursor-default min-w-[400px] bg-white dark:bg-[#313338] flex flex-col min-h-screen">
     {% include 'includes/header.html' %} 
-    {% block content %}
-
-    {% endblock %}
+      {% block content %}
+      
+      {% endblock %}
     {% include 'includes/footer.html' %}
   </body>
 </html>

@@ -15,7 +15,7 @@ header > div {
 
 header > div:first-child::after {
   position: absolute;
-  top: 70%;
+  top: 65%;
   left: 23%;
   color: chocolate;
   content: "Clone";

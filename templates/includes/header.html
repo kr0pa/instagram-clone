@@ -1,8 +1,8 @@
 {% load static %}
 
-<header class="flex justify-between items-center max-h-[70px] bg-[whitesmoke] dark:bg-[#0F172A] py-2 px-4 transition-all duration-300">
-  <div class="flex w-40 object-cover cursor-pointer">
-    <a href="/"><img src="{% static 'instagram_logo.png' %}" alt="" /></a>
+<header class="flex justify-between items-center h-14 bg-[whitesmoke] dark:bg-[#0F172A] py-2 px-4 transition-all duration-300">
+  <div class="flex w-36 object-cover cursor-pointer">
+    <a href="/"><img x-bind:src="darkMode ? '{% static 'instagram_logo1.png' %}' : '{% static 'instagram_logo2.png' %}'" alt="" /></a>
   </div>
 
   <div class="hidden md:flex justify-between items-center flex-1">

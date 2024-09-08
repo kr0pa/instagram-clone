@@ -1,6 +1,7 @@
 {% extends 'base.html' %} {% block content %}
-  <section class="flex flex-col items-center justify-center min-h-screen">
+  <section class="flex-grow flex flex-col items-center justify-center">
     <form class="flex flex-col items-center justify-center p-10 rounded-lg bg-[whitesmoke] dark:bg-[#2B2D31] [&>*]:mb-4 [&>*]:w-full" method="POST" enctype="multipart/form-data">
+      <h1 class="text-2xl text-black dark:text-white uppercase">Dodaj wpis</h1>
       {% csrf_token %} {{ form.as_p }}
       <button class="uppercase border border-yellow-600 rounded-md bg-yellow-300 px-4 py-2" type="submit">wyślij</button>
     </form>
