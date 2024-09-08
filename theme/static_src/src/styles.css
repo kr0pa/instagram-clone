@@ -6,7 +6,8 @@ html {
   font-family: "Roboto", sans-serif;
 }
 
-header > div {
+header > div,
+section#view_post {
   position: relative;
   font-family: "Concert One", sans-serif;
   font-weight: 700;

@@ -28,8 +28,8 @@ class EditForm(ModelForm):
         model = Post
         fields = ['title', 'body']
         widgets = {
-            'title': forms.TextInput(attrs={'placeholder': 'Dodaj tytuł...', 'class': 'text-black dark:text-white rounded-lg w-full dark:bg-[#313338]'}),
-            'body': forms.Textarea(attrs={'placeholder': 'Dodaj treść...', 'style': 'resize: none;', 'class': 'text-black dark:text-white w-full rounded-lg outline-none border-white dark:bg-[#313338]'}),
+            'title': forms.TextInput(attrs={'placeholder': 'Dodaj tytuł...', 'class': 'text-2xl text-black dark:text-white rounded-lg w-full dark:bg-[#313338]'}),
+            'body': forms.Textarea(attrs={'placeholder': 'Dodaj treść...', 'style': 'resize: none;', 'class': 'text-2xl text-black dark:text-white w-full rounded-lg outline-none border-white dark:bg-[#313338]'}),
         }
         
     def __init__(self, *args, **kwargs):

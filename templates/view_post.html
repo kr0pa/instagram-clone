@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-  <section class="w-full h-full flex flex-col items-center lg:flex-row lg:justify-between flex-grow p-4 max-w-screen-xl xl:mx-auto">
-    <figure class="object-cover w-full max-w-screen-sm border-4 border-orange-500 rounded-lg">
-      <img class="w-full" src="{{ post.image.url }}" alt="" />
+  <section id="view_post" class="w-full min-h-screen flex flex-col md:flex-row md:justify-between p-4 max-w-screen-xl xl:mx-auto">
+    <figure class="w-full h-full border border-black rounded-lg">
+      <img class="md:h-[300px] md:w-[300px] object-contain" src="{{ post.image.url }}" alt="" />
     </figure>
 
-    <form method="POST" class="border-2 border-red-600 flex-grow h-screen">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">wyślij</button>
-    </form>
+    {% if user == post.author %}
+      <form method="POST" class="h-[300px] flex-grow">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="w-full uppercase border border-yellow-600 rounded-md bg-yellow-300 px-4 py-2" type="submit">wyślij</button>
+      </form>
+    {% endif %}
   </section>
 {% endblock %}
